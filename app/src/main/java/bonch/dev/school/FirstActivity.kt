@@ -20,10 +20,11 @@ class FirstActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_first)
         initializeView()
-        indicator = if(savedInstanceState == null){
-            Indicator()
+        if(savedInstanceState == null){
+            indicator = Indicator()
         }else{
-            Indicator(savedInstanceState.getBoolean("INDICATOR"))
+            indicator = Indicator(savedInstanceState.getBoolean("INDICATOR"))
+            indicatorButton.isEnabled = false
         }
         counter = if(savedInstanceState == null){
             Counter()
@@ -54,6 +55,7 @@ class FirstActivity : AppCompatActivity() {
 
         indicatorButton.setOnClickListener {
             indicator.changeState()
+            indicatorButton.isEnabled = false
         }
 
         nextActivityButton.setOnClickListener {
